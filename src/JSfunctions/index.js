@@ -71,3 +71,20 @@ const createUser = () => {
   displayUser();
 };
 createUser();
+
+// IIFE
+
+(function () {
+  const person = {
+    name: 'Linic',
+    age: 30,
+    favoriteFood: 'Chips and Chicken',
+  };
+  console.log(person);
+})();
+
+// parsing a param
+
+(function (name) {
+  console.log(`hello ${name}`);
+})('alex');

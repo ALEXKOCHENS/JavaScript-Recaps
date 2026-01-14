@@ -3,7 +3,7 @@
 //Declaration
 
 function hangOut(name) {
-  console.log(`Hey,${name} could we gor for a hangout today?`);
+  console.log(`Hey,${name} could we go for a hangout today?`);
 }
 hangOut('kochens');
 
@@ -45,3 +45,12 @@ console.log(createPerson().course);
 
 const colors = ['red', 'white', 'pink', 'green'];
 colors.forEach((col) => console.log(col));
+
+// IIFE(Immediately Invoked Function Expression)
+
+const person = {
+  name: 'alex kochens',
+  age: 20,
+  favoriteFood: 'Pizza',
+};
+// console.log(person);
