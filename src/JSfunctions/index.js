@@ -44,7 +44,7 @@ add(); //this can access a global scoped variable
 for (let i = 0; i <= 15; i++) {
   console.log(i);
 }
-// console.log(i); //this gives an error, but if var is used, it works
+console.log(i); //this gives an error, but if var is used, it works
 
 // Var is function scoped
 
