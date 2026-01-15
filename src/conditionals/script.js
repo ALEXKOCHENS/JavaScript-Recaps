@@ -18,7 +18,7 @@ if (!grade) {
   console.log(`Your grade is ${grade}`);
 }
 
-// elseif and nesting
+// else if and nesting
 
 let availableAmount = 2999;
 
