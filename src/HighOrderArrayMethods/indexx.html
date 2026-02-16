@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activities & Intents Guide - Android Development</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.7;
+        padding: 20px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .container {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        padding: 35px;
+        margin-bottom: 30px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 35px;
+        padding-bottom: 25px;
+        border-bottom: 2px solid #eaeaea;
+      }
+
+      h1 {
+        color: #2c3e50;
+        font-size: 2.3rem;
+        margin-bottom: 15px;
+        line-height: 1.3;
+      }
+
+      .intro-line {
+        color: #e74c3c;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+      }
+
+      .section {
+        margin: 35px 0;
+        padding: 25px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        border-left: 5px solid;
+      }
+
+      .definition-section {
+        border-left-color: #3498db;
+        background-color: #e8f4fc;
+      }
+
+      .creation-section {
+        border-left-color: #2ecc71;
+        background-color: #e8f8ef;
+      }
+
+      .intent-section {
+        border-left-color: #f39c12;
+        background-color: #fef9e7;
+      }
+
+      .analogy-section {
+        border-left-color: #9b59b6;
+        background-color: #f4ecf7;
+      }
+
+      h2 {
+        color: #2c3e50;
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+        border-bottom: 2px dashed #ddd;
+      }
+
+      h3 {
+        color: #2c3e50;
+        margin: 20px 0 12px 0;
+      }
+
+      p {
+        margin-bottom: 18px;
+        font-size: 1.05rem;
+      }
+
+      .analogy-box {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border: 2px solid #e1bee7;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .analogy-title {
+        color: #8e44ad;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .analogy-title:before {
+        content: '💡';
+        margin-right: 10px;
+        font-size: 1.2rem;
+      }
+
+      .code-block {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        font-family: 'Courier New', monospace;
+        overflow-x: auto;
+        line-height: 1.5;
+      }
+
+      .code-comment {
+        color: #7f8c8d;
+      }
+
+      .code-keyword {
+        color: #3498db;
+      }
+
+      .code-class {
+        color: #e74c3c;
+      }
+
+      .code-method {
+        color: #2ecc71;
+      }
+
+      .step-box {
+        background-color: white;
+        padding: 18px;
+        border-radius: 8px;
+        margin: 15px 0;
+        border-left: 4px solid #3498db;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .step-number {
+        display: inline-block;
+        background-color: #3498db;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 30px;
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .comparison-table th {
+        background-color: #34495e;
+        color: white;
+        text-align: left;
+        padding: 16px;
+        font-weight: 600;
+      }
+
+      .comparison-table td {
+        padding: 16px;
+        border-bottom: 1px solid #eee;
+        vertical-align: top;
+      }
+
+      .comparison-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .important-note {
+        background-color: #fff8e1;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 25px 0;
+        border-left: 5px solid #ffb300;
+      }
+
+      .note-title {
+        color: #ff8f00;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .note-title:before {
+        content: '📌';
+        margin-right: 10px;
+      }
+
+      .practical-example {
+        background-color: #e8f5e9;
+        padding: 22px;
+        border-radius: 8px;
+        margin: 25px 0;
+        border-left: 5px solid #4caf50;
+      }
+
+      .example-title {
+        color: #2e7d32;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .example-title:before {
+        content: '📱';
+        margin-right: 10px;
+      }
+
+      .summary-box {
+        background-color: #e3f2fd;
+        padding: 25px;
+        border-radius: 10px;
+        margin: 30px 0;
+        text-align: center;
+      }
+
+      .summary-title {
+        color: #1565c0;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 25px;
+        border-top: 1px solid #eee;
+        color: #7f8c8d;
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        .section {
+          padding: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Creating & Launching Activities with Intents</h1>
+        <p class="intro-line">
+          The "How" and "Why" of Android Screen Navigation
+        </p>
+        <p class="subtitle">
+          Group 1 - Question 4 | Android Development Presentation
+        </p>
+        <p class="subtitle">Presented by: [Your Name Here]</p>
+      </header>
+
+      <!-- Introduction -->
+      <div class="section definition-section">
+        <h2>Let's Start Simple: What Are We Talking About?</h2>
+
+        <p>
+          Okay friends, When you use any app on your phone, what do you see?
+          Screens, right? A login screen, then maybe a home screen, then a
+          details screen, and so on.
+        </p>
+
+        <p>
+          In Android, each of these screens is called an
+          <strong>Activity</strong>. Think of an Activity as a single window
+          where your app does something. If your app was a book, each Activity
+          would be a page.
+        </p>
+
+        <p>
+          Now, how do you go from one page to another? You turn the page! In
+          Android, we "turn pages" using something called an
+          <strong>Intent</strong>.
+        </p>
+
+        <div class="analogy-box">
+          <div class="analogy-title">Simple Analogy Time!</div>
+          <p>Imagine you're in a shopping mall:</p>
+          <ul>
+            <li><strong>The Mall</strong> = Your Android App</li>
+            <li>
+              <strong>Each Shop</strong> = An Activity (LoginActivity,
+              HomeActivity, ProfileActivity)
+            </li>
+            <li><strong>The Mall Directory/Maps</strong> = Android System</li>
+            <li>
+              <strong>You saying "I want to go to the food court"</strong> =
+              Creating an Intent
+            </li>
+            <li>
+              <strong>Actually walking to the food court</strong> = Launching
+              the Activity
+            </li>
+          </ul>
+          <p>
+            So an Intent is basically you telling Android: "Hey, I want to go to
+            this specific place (Activity) in my app!"
+          </p>
+        </div>
+      </div>
+
+      <!-- What is an Activity? -->
+      <div class="section">
+        <h2>What Exactly Is an Activity?</h2>
+
+        <p>
+          An Activity is one of the four main components of an Android app (the
+          others are Services, Broadcast Receivers, and Content Providers).
+        </p>
+
+        <p>Here's what makes an Activity special:</p>
+
+        <div class="step-box">
+          <span class="step-number">1</span>
+          <strong>It's a single focused thing the user can do</strong>
+          <p>
+            Like typing a message, viewing a photo, or scrolling through a list.
+          </p>
+        </div>
+
+        <div class="step-box">
+          <span class="step-number">2</span>
+          <strong>It has a user interface (UI)</strong>
+          <p>
+            Every Activity has a layout file (XML) that defines what buttons,
+            text, images appear on screen.
+          </p>
+        </div>
+
+        <div class="step-box">
+          <span class="step-number">3</span>
+          <strong>It has a lifecycle</strong>
+          <p>
+            It gets created, started, paused, stopped, and destroyed. Like a
+            plant growing, flowering, and eventually... well, you get the idea.
+          </p>
+        </div>
+
+        <div class="step-box">
+          <span class="step-number">4</span>
+          <strong>It can be launched from other Activities</strong>
+          <p>
+            This is where Intents come in - they're the "invitations" to start
+            new Activities.
+          </p>
+        </div>
+
+        <div class="important-note">
+          <div class="note-title">Remember This!</div>
+          <p>
+            Every Android app must have at least one Activity. When you tap an
+            app icon, Android launches that app's "main" Activity (usually
+            called MainActivity). It's like the front door of a house - the
+            first thing you see when you enter.
+          </p>
+        </div>
+      </div>
+
+      <!-- Creating an Activity -->
+      <div class="section creation-section">
+        <h2>How Do We Create an Activity? (Step-by-Step)</h2>
+
+        <p>
+          Creating an Activity is like baking a cake - you need the right
+          ingredients and steps:
+        </p>
+
+        <h3>Step 1: Create the Java/Kotlin Class</h3>
+        <div class="code-block">
+          <span class="code-comment"
+            >// This is MainActivity.java - our first Activity</span
+          ><br />
+          <span class="code-keyword">public class</span>
+          <span class="code-class">MainActivity</span>
+          <span class="code-keyword">extends</span> AppCompatActivity {<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">@Override</span
+          ><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword"
+            >protected void</span
+          >
+          <span class="code-method">onCreate</span>(Bundle savedInstanceState)
+          {<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+            class="code-keyword"
+            >super</span
+          >.onCreate(savedInstanceState);<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setContentView(R.layout.<span
+            class="code-class"
+            >activity_main</span
+          >);
+          <span class="code-comment">// This connects to our XML layout</span
+          ><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+          }
+        </div>
+
+        <h3>Step 2: Create the Layout (XML File)</h3>
+        <div class="code-block">
+          <span class="code-comment"
+            >&lt;!-- This is activity_main.xml - defines what the screen looks
+            like --&gt;</span
+          ><br />
+          &lt;?xml version="1.0" encoding="utf-8"?&gt;<br />
+          &lt;LinearLayout<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;xmlns:android="http://schemas.android.com/apk/res/android"<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="match_parent"<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="match_parent"<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;android:orientation="vertical"&gt;<br /><br />
+
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"
+            >&lt;!-- A simple button --&gt;</span
+          ><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;Button<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:id="@+id/myButton"<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="wrap_content"<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="wrap_content"<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:text="Click
+          Me!" /&gt;<br /><br />
+
+          &lt;/LinearLayout&gt;
+        </div>
+
+        <h3>Step 3: Declare the Activity in AndroidManifest.xml</h3>
+        <p>
+          This is like registering your Activity with Android so it knows it
+          exists:
+        </p>
+        <div class="code-block">
+          <span class="code-comment"
+            >&lt;!-- Inside AndroidManifest.xml --&gt;</span
+          ><br />
+          &lt;manifest ...&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;application ...&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+            class="code-comment"
+            >&lt;!-- This declares our Activity --&gt;</span
+          ><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;activity
+          android:name=".MainActivity"&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;intent-filter&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+            class="code-comment"
+            >&lt;!-- This makes it launch when app starts --&gt;</span
+          ><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;action
+          android:name="android.intent.action.MAIN" /&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;category
+          android:name="android.intent.category.LAUNCHER" /&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/intent-filter&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/activity&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;/application&gt;<br />
+          &lt;/manifest&gt;
+        </div>
+
+        <div class="important-note">
+          <div class="note-title">Key Point to Remember</div>
+          <p>
+            If you create an Activity but forget to declare it in
+            AndroidManifest.xml, your app will crash when you try to launch it.
+            It's like building a room in your house but forgetting to put a door
+            - nobody can get in!
+          </p>
+        </div>
+      </div>
+
+      <!-- What are Intents? -->
+      <div class="section intent-section">
+        <h2>Now, What About Intents?</h2>
+
+        <p>
+          An Intent is a messaging object you can use to request an action from
+          another app component (like starting an Activity).
+        </p>
+
+        <div class="analogy-box">
+          <div class="analogy-title">Another Analogy - Restaurant Style!</div>
+          <p>Think of an Intent like an order at a restaurant:</p>
+          <ul>
+            <li><strong>You (the customer)</strong> = Your current Activity</li>
+            <li>
+              <strong>The menu</strong> = All possible Activities in your app
+            </li>
+            <li>
+              <strong>Your order</strong> = The Intent ("I want the burger
+              page")
+            </li>
+            <li><strong>The waiter</strong> = Android System</li>
+            <li>
+              <strong>The kitchen preparing your burger</strong> = The new
+              Activity being created
+            </li>
+            <li>
+              <strong>Serving your burger</strong> = The new Activity appearing
+              on screen
+            </li>
+          </ul>
+        </div>
+
+        <h3>Two Types of Intents:</h3>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Explicit Intents</th>
+              <th>Implicit Intents</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>What:</strong> You specifically name which Activity to
+                start<br /><br />
+                <strong>When to use:</strong> When you know exactly which
+                Activity in YOUR app you want<br /><br />
+                <strong>Example:</strong> "Open the ProfileActivity in my app"
+              </td>
+              <td>
+                <strong>What:</strong> You describe an action, and Android finds
+                which app can do it<br /><br />
+                <strong>When to use:</strong> When you want to use other apps'
+                capabilities<br /><br />
+                <strong>Example:</strong> "Open a web page" (could use Chrome,
+                Firefox, etc.)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Launching Activities with Intents -->
+      <div class="section">
+        <h2>Putting It Together: Launching Activities</h2>
+
+        <p>
+          Now comes the fun part! Let's see how we actually launch a new
+          Activity from our current one.
+        </p>
+
+        <div class="practical-example">
+          <div class="example-title">
+            Real Example: Login Screen → Home Screen
+          </div>
+          <p>
+            Imagine we have a login screen (LoginActivity). After the user logs
+            in successfully, we want to take them to the home screen
+            (HomeActivity).
+          </p>
+        </div>
+
+        <h3>Step 1: Create the Intent</h3>
+        <div class="code-block">
+          <span class="code-comment"
+            >// Inside LoginActivity.java, after login is successful</span
+          ><br />
+          Intent intent = <span class="code-keyword">new</span> Intent(<span
+            class="code-keyword"
+            >this</span
+          >, HomeActivity.<span class="code-keyword">class</span>);
+        </div>
+        <p>
+          This says: "Create an Intent to go from 'here' (LoginActivity) to
+          HomeActivity."
+        </p>
+
+        <h3>Step 2: Add Extra Data (Optional)</h3>
+        <p>What if we want to send the username to the HomeActivity?</p>
+        <div class="code-block">
+          <span class="code-comment"
+            >// Add data to the Intent (like putting a note in an
+            envelope)</span
+          ><br />
+          intent.putExtra("USERNAME", "john_doe");<br />
+          intent.putExtra("EMAIL", "john@example.com");
+        </div>
+
+        <h3>Step 3: Launch the Activity</h3>
+        <div class="code-block">
+          <span class="code-comment"
+            >// This actually starts the new Activity</span
+          ><br />
+          startActivity(intent);
+        </div>
+
+        <h3>Step 4: Receive Data in HomeActivity</h3>
+        <div class="code-block">
+          <span class="code-comment"
+            >// Inside HomeActivity's onCreate() method</span
+          ><br />
+          String username = getIntent().getStringExtra("USERNAME");<br />
+          String email = getIntent().getStringExtra("EMAIL");<br /><br />
+
+          <span class="code-comment">// Now we can use these values</span><br />
+          TextView welcomeText = findViewById(R.id.welcomeText);<br />
+          welcomeText.setText("Welcome, " + username + "!");
+        </div>
+
+        <div class="important-note">
+          <div class="note-title">Pro Tip!</div>
+          <p>
+            Always use constants for your extra keys (like public static final
+            String KEY_USERNAME = "USERNAME") instead of hardcoding strings.
+            This prevents typos and makes your code easier to maintain!
+          </p>
+        </div>
+      </div>
+
+      <!-- The Complete Picture -->
+      <div class="section analogy-section">
+        <h2>Let Me Paint the Complete Picture</h2>
+
+        <p>Think of your Android app like a TV series:</p>
+
+        <div class="analogy-box">
+          <div class="analogy-title">TV Series Analogy</div>
+          <ul>
+            <li><strong>Each Episode</strong> = An Activity</li>
+            <li>
+              <strong>The "Previously on..." recap</strong> = The data you pass
+              through Intents
+            </li>
+            <li>
+              <strong>The "Next episode" button</strong> = The startActivity()
+              call
+            </li>
+            <li><strong>The TV remote</strong> = The Intent object</li>
+            <li><strong>The TV network</strong> = The Android System</li>
+          </ul>
+          <p>
+            When you press "Next episode" (startActivity), you're using the
+            remote (Intent) to tell the network (Android) which episode
+            (Activity) to play next. Sometimes you even include what happened
+            previously (extra data) so the next episode makes sense!
+          </p>
+        </div>
+
+        <h3>What Actually Happens Behind the Scenes?</h3>
+        <ol>
+          <li>You call startActivity(intent) in your current Activity</li>
+          <li>Android pauses your current Activity (calls onPause())</li>
+          <li>Android creates the new Activity instance</li>
+          <li>
+            The new Activity goes through its lifecycle: onCreate() → onStart()
+            → onResume()
+          </li>
+          <li>The new Activity appears on screen</li>
+          <li>
+            Your old Activity might be stopped (onStop()) if it's completely
+            covered
+          </li>
+        </ol>
+
+        <p>
+          All of this happens super fast, giving users that smooth "screen
+          transition" feeling we're all used to in apps.
+        </p>
+      </div>
+
+      <!-- Common Mistakes -->
+      <div class="section">
+        <h2>Common Mistakes to Avoid</h2>
+
+        <div class="step-box">
+          <span class="step-number">1</span>
+          <strong
+            >Forgetting to declare Activities in AndroidManifest.xml</strong
+          >
+          <p>
+            This is the #1 reason for crashes when launching Activities. Always
+            check your manifest!
+          </p>
+        </div>
+
+        <div class="step-box">
+          <span class="step-number">2</span>
+          <strong>Passing too much data through Intents</strong>
+          <p>
+            Intents have size limits! If you need to pass lots of data, consider
+            using a database, ViewModel, or passing an ID instead.
+          </p>
+        </div>
+
+        <div class="step-box">
+          <span class="step-number">3</span>
+          <strong>Using implicit Intents without a fallback</strong>
+          <p>
+            If you use an implicit Intent to open a web page but the user has no
+            browser installed, your app will crash. Always check if there's an
+            app to handle your Intent!
+          </p>
+        </div>
+
+        <div class="step-box">
+          <span class="step-number">4</span>
+          <strong>Not handling the back button properly</strong>
+          <p>
+            When users press back, they expect to go to the previous screen.
+            Make sure your Activity stack makes sense!
+          </p>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="summary-box">
+        <div class="summary-title">Quick Summary: What We Learned</div>
+        <p>
+          ✅ <strong>Activities</strong> = Screens in your app (like pages in a
+          book)
+        </p>
+        <p>
+          ✅ <strong>Intents</strong> = Messages that request actions (like
+          asking to turn to a specific page)
+        </p>
+        <p>
+          ✅ <strong>Creating an Activity</strong> = Java/Kotlin class + XML
+          layout + Manifest declaration
+        </p>
+        <p>
+          ✅ <strong>Launching an Activity</strong> = Create Intent → Add data
+          (optional) → call startActivity()
+        </p>
+        <p>
+          ✅ <strong>Two Intent types</strong> = Explicit (specific Activity) &
+          Implicit (any app that can handle the action)
+        </p>
+        <br />
+        <p>
+          <strong>Final Thought:</strong> Activities and Intents are the
+          building blocks of Android navigation. Master these, and you can build
+          any screen flow your app needs!
+        </p>
+      </div>
+
+      <!-- Final Words -->
+      <div class="important-note">
+        <div class="note-title">Before I Finish...</div>
+        <p>
+          Remember, the best way to understand this is to actually build it!
+          Create a simple app with two Activities. Make a button on the first
+          that opens the second. Then add some data passing. Then try an
+          implicit Intent to open a website. Hands-on practice makes everything
+          click!
+        </p>
+        <p>
+          And don't worry if it seems confusing at first - we all started there.
+          Even experienced developers sometimes forget to add Activities to the
+          manifest!
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <p>Presentation Guide: Creating & Launching Activities with Intents</p>
+      <p>Group 1 | Android Development | Evening Session</p>
+      <p>Good luck with your presentation! You've got this! 👍</p>
+    </footer>
+  </body>
+</html>
